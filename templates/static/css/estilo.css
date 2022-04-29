@@ -8,3 +8,7 @@
 .estrelas  input[type=radio]:checked  ~ label i.fa:before{
 	color: #CCC;
 }
+
+body{
+    background-color: azure;
+}

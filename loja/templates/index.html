@@ -13,7 +13,7 @@ Home
           
 
           <div class="row" style="min-height: 600px;">
-            <div id="carouselExampleControlsjv" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControlsjv" class="carousel slide bg-light" style="box-shadow: 10px 10px 10px rgb(175, 175, 175);" data-bs-ride="carousel">
 
                 <div class="carousel-inner">
                   <div class="carousel-item active text-center">
@@ -108,7 +108,7 @@ Home
             <div class="row row-cols-2 row-cols-md-4 g-4">
               {% for l in livros %}
                 <div class="col">
-                  <div class="card" style="min-height: 650px;">
+                  <div class="card" style="min-height: 650px; box-shadow: 7px 7px 4px rgb(175, 175, 175);">
                     <a href="{% url 'produto' l.id%}"><img src="{{l.capa.url}}" class="card-img-top"></a>
                     <div class="card-body">
                       <h5 class="card-title">{{l.titulo}}</h5>
