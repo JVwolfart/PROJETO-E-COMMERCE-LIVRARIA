@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Alterar senha
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Alterar senha</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+<div class="row">
+  <div class="col-3"></div>
+      <div class="col-md-5">
+      
+      <form method="post">
+        {% csrf_token %}
+        <table class="table">
+          {{form_senha}}
+        </table>
+
+        <div class="form-group">
+          <input type="submit" value="Alterar" class="btn btn-primary">
+        </div>
+      </form>
+            <br><br><br><br><br><br><br><br><br>
+      </div>
+  <div class="col-3"></div>
+</div>
+
+
+{% endblock %}

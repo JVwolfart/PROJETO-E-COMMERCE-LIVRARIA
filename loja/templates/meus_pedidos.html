@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Pedidos de {{user}}
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Meus pedidos</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+<h1 class="text-center my-5 text-danger">Pedidos de {{user}}</h1>          
+
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-hover text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">N° do pedido</th>
+                    <th scope="col">Data do pedido</th>
+                    <th scope="col">Total do pedido</th>
+                    <th scope="col">Forma de pagamento</th>
+                    <th scope="col">Endereço de entrega</th>
+                    <th scope="col">Frete</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in pedidos %}
+                  <tr class="align-middle text-center">
+                    <th scope="row">
+                      {{p.id}}
+                    </th>
+                    <td>{{p.data}}</td>
+                    <th scope="row">
+                      R$ {{p.total}}
+                    </th>
+                    <th scope="row">
+                      {{p.forma_pagamento}}
+                    </th>
+                    <td>
+                      {{p.entrega}}
+                    </td>
+                    {% if not p.frete_gratis%}
+                    <td>R$ {{p.frete}}</td>
+                    {% else %}
+                    <td class="text-danger">Grátis</td>
+                    {% endif %}
+                    <td>{{p.situacao}}</td>
+                    <td><a href="{% url 'itens_pedido' p.id%}" class="btn btn-primary">Ver itens</a></td>
+                  </tr>
+                 {% endfor %}
+                </tbody>
+              </table>              
+            </div>
+
+            
+
+            <div class="mb-5"></div>
+          </div>
+{% endblock %}

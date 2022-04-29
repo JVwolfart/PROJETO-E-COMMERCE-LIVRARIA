@@ -1,0 +1,103 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Carrinho de compras
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'produtos'%}">Produtos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Carrinho</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+
+<h1 class="text-center my-5 text-danger">Carrinho</h1>
+          <div class="row">
+            
+            <table class="table table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Capa</th>
+                  <th scope="col">Produto</th>
+                  <th scope="col">Quantidade</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in itens %}
+                <tr class="align-middle text-center">
+                  <th scope="row">
+                    <img src="{{i.produto.capa.url}}" style="width: 25%;">
+                  </th>
+                  <th scope="row">
+                    <h4>{{i.produto.titulo}}</h4>
+                  </th>
+                  <td>
+                    <span>
+                      <a href="{% url 'add_item_carrinho' i.id%}" style="text-decoration: none;" title="Adicionar item"><h5>+</h5>
+                      </a> {{i.quant}}
+                      <a href="{% url 'excluir_item_carrinho' i.id%}" style="text-decoration: none;" title="Excluir item"><h5>-</h5></a></span>
+                  </td>
+                  <td>R$ {{i.valor_unitario}}</td>
+                  <td>R$ {{i.total_produto}}</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+
+          
+          
+          <div class="row my-4">
+            <div class="col-lg-6">
+              <span class="text-danger"><b>PROMOÇÃO: Acima de 10 itens seu frete é Grátis</b></span>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td>Subtotal</td>
+                    <td><b>R$ {{carrinho_user.subtotal}}</b></td>
+                  </tr>
+
+                  <tr>
+                    {% if carrinho_user.frete == 0%}
+                    <td>Frete</td>
+                    <td><a href="{% url 'calcular_frete' carrinho_user.id%}">Calcular</a></td>
+                    {% elif carrinho_user.frete > 50%}
+                    <td>Frete</td>
+                    <td class="text-danger">Grátis</td>
+                    {% else %}
+                    <td>Frete</td>
+                    <td>{{carrinho_user.frete}}</td>
+                    {% endif %}
+                  </tr>
+
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td><b>R$ {{carrinho_user.total}}</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-lg-3">
+              <div class="col-12 my-3">
+                <a href="{% url 'produtos'%}" class="btn btn-primary" style="width: 100%;">Adicionar mais produtos</a>
+              </div>
+              {% if carrinho_user.n_itens > 0%}
+              <div class="col-12 my-3">
+                <a href="{% url 'selecionar_endereco' carrinho_user.id%}" class="btn btn-success" style="width: 100%;">Finalizar seu pedido</a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+{% endblock %}

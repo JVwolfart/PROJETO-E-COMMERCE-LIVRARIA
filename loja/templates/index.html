@@ -1,0 +1,137 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Home
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+{% include 'parciais/_messages.html'%}
+
+<h1 class="text-center my-5 text-danger">Destaques nas avaliações</h1>
+          
+
+          <div class="row" style="min-height: 600px;">
+            <div id="carouselExampleControlsjv" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-inner">
+                  <div class="carousel-item active text-center">
+                      <div class="row">
+                        <div class="col-4">
+                            <a href="{% url 'produto' carrossel_active.id%}"><img src="{{carrossel_active.capa.url}}" style="width: 80%;"></a>
+                        </div>
+                        <div class="col-6">
+                            <h3>{{carrossel_active.titulo}}</h3>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Autor: {{carrossel_active.autor}}</p>
+                                    <h3>Preço: <span class="text-danger">R$ {{carrossel_active.preco}}</span></h3>
+                                    <span>Avaliação: </span>
+                                    <p>{{carrossel_active.avaliacao_livro}}/5 <i class="fa-solid fa-star text-warning"></i></p>
+                                    <p>Número de avaliações: {{carrossel_active.numero_avaliacoes}}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class=" d-none d-lg-block col-lg-12">
+                                    <h6>Sinopse: </h6>
+                                    <p>
+                                        {{carrossel_active.excerto}}...
+                                    </p>
+                                </div>
+                                
+                            </div>
+
+                            <a class="btn btn-primary" href="{% url 'produto' carrossel_active.id%}">Ver detalhes</a>
+                        </div>
+                      </div>
+                    
+                    
+                    </div>
+                    {% for c in carrossel%}
+
+                    <div class="carousel-item text-center">
+                      <div class="row">
+                        <div class="col-4">
+                          <a href="{% url 'produto' c.id%}"><img src="{{c.capa.url}}" style="width: 80%;"></a>
+                        </div>
+                        <div class="col-6">
+                            <h3>{{c.titulo}}</h3>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Autor: {{c.autor}}</p>
+                                    <h3>Preço: <span class="text-danger">R$ {{c.preco}}</span></h3>
+                                    <span>Avaliação: </span>
+                                    <p>{{c.avaliacao_livro}}/5 <i class="fa-solid fa-star text-warning"></i></p>
+                                    <p>Número de avaliações: {{c.numero_avaliacoes}}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class=" d-none d-lg-block col-lg-12">
+                                    <h6>Sinopse: </h6>
+                                    <p>
+                                        {{c.excerto}}...
+                                    </p>
+                                </div>
+                                
+                            </div>
+
+                            <a class="btn btn-primary" href="{% url 'produto' c.id%}">Ver detalhes</a>
+                        </div>
+                      </div>
+                    
+                    
+                    </div>
+
+                    {%endfor%}
+
+                    
+                  </div>
+                  
+                  
+                  
+                </div>
+                
+                
+
+              </div>
+              
+              
+
+
+          <h1 class="text-center my-4 text-danger">Novidades na loja</h1>
+          
+          <div class="row">
+
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+              {% for l in livros %}
+                <div class="col">
+                  <div class="card" style="min-height: 650px;">
+                    <a href="{% url 'produto' l.id%}"><img src="{{l.capa.url}}" class="card-img-top"></a>
+                    <div class="card-body">
+                      <h5 class="card-title">{{l.titulo}}</h5>
+                      <p class="card-text">Categoria: {{l.categoria}}</p>
+                      <p class="card-text">Autor: {{l.autor}}</p>
+                      <h5 class="card-text">Preço: <span class="text-danger">R$ {{l.preco}}</span></h5>
+                      <a class="btn btn-primary mt-3" href="{% url 'produto' l.id%}">Mais detalhes</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+              
+              
+              </div>
+
+          </div>
+
+          <div class="row text-center mt-5">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <a href="{% url 'produtos'%}" class="btn btn-lg btn-outline-primary">Veja mais títulos</a>
+            </div>
+            <div class="col-2"></div>
+          </div>
+
+{% endblock %}

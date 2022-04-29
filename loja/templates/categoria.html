@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+{{categoria.categoria}}
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Categoria</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+<h1 class="text-center my-5 text-danger">Categoria: {{categoria.categoria}}</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Livro</th>
+      <th scope="col">Título</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Preço unitário</th>
+      <th scope="col">Avaliação</th>
+      <th scope="col">N° avaliações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for l in livros%}
+    <tr class="align-middle">
+      <td>
+        <a href="{% url 'produto' l.id%}"><img src="{{l.capa.url}}" style="height: 80px;"></a>
+      </td>
+      <td><a href="{% url 'produto' l.id%}">{{l.titulo}}</a></td>
+      <td>{{l.autor}}</td>
+      <td>{{l.categoria}}</td>
+      <td>R$ {{l.preco}}</td>
+      <td>{{l.avaliacao_livro}}/5 <i class="fa-solid fa-star text-warning"></i></td>
+      <td>{{l.numero_avaliacoes}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+<nav aria-label="Page navigation example" class="text-center justify-content-center">
+  <ul class="pagination justify-content-center text-center">
+    {%if livros.has_previous%}
+    <li class="page-item">
+      <a class="page-link" href="?p={{livros.previous_page_number}}&termo={{request.GET.termo}}">Anterior</a>
+    </li>
+    {%endif%}
+    {%for pagina in livros.paginator.page_range%}
+    {%if livros.number == pagina%}
+      <li class="page-item active"><a class="page-link bg-success" href="?p={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
+    {% else %}
+      <li class="page-item"><a class="page-link" href="?p={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
+    {%endif%}
+    {%endfor%}
+    {%if livros.has_next%}
+    <li class="page-item">
+      <a class="page-link" href="?p={{livros.next_page_number}}&termo={{request.GET.termo}}">Próxima</a>
+    </li>
+    {%endif%}
+  </ul>
+</nav>
+          
+
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Informações de {{user}}
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Informações de {{user}}</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+<h1 class="text-center my-5 text-danger">Informações de {{user}}</h1> 
+
+<div class="row">
+            
+  <<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Rua</th>
+        <th>Número</th>
+        <th>CEP</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in enderecos%}
+      <tr>
+        <td>
+          {{e.nome}}
+        </td>
+        <td>{{e.rua}}</td>
+        <td>{{e.numero}}</td>
+        <td>{{e.cep}}</td>
+        <td>{{e.bairro}}</td>
+        <td>{{e.municipio}}</td>
+        <td>{{e.estado}}</td>
+        <td><a href="{% url 'alterar_endereco' e.id%}" class="btn btn-primary">Alterar</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <a href="{% url 'add_endereco'%}" class="btn btn-lg btn-primary">Adicionar endereço</a>
+  </div>
+</div>
+
+
+
+            
+
+            <div class="mb-5"></div>
+          </div>
+{% endblock %}

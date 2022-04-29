@@ -1,0 +1,110 @@
+{% extends 'base.html'%}
+
+{% block 'titulo'%}
+Cadastro de endereço
+{% endblock %}
+
+
+{%block 'conteudo'%}
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb mt-2">
+    <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'meus_dados'%}">Meus dados</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Alterar endereço</li>
+  </ol>
+</nav>
+
+{% include 'parciais/_messages.html'%}
+
+<h1 class="text-center my-5 text-danger">Alteração de dados pessoais e endereço</h1>
+          
+
+          <div class="row">
+            <div class="col-3"></div>
+                <div class="col-md-5">
+                    <form method="post" class="mb-5">
+                      {% csrf_token %}
+                        <div class="mb-3">
+                          <label class="form-label">Identifique seu endereço (ex: 'casa', 'escritório')</label>
+                          <input type="text" class="form-control" placeholder="ex: 'casa', 'escritório'" name="nome" value="{{endereco.nome}}" maxlength="20">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Nome da rua</label>
+                          <input type="text" class="form-control" placeholder="Nome da rua" name="rua" value="{{endereco.rua}}" maxlength="150">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Bairro</label>
+                          <input type="text" class="form-control" placeholder="Bairro" name="bairro" value="{{endereco.bairro}}" maxlength="80">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Cidade</label>
+                          <input type="text" class="form-control" placeholder="Cidade" name="cidade" value="{{endereco.municipio}}" maxlength="80">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Estado</label>
+                          <select name="estado" id="" class="form-control">
+                            <option value="selecione seu estado" selected>Selecione um estado</option>
+                            <option value="SC">SC</option>
+                            <option value="RS">RS</option>
+                            <option value="PR">PR</option>
+                            <option value="SP">SP</option>
+                            <option value="RJ">RJ</option>
+                            <option value="MG">MG</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MS">MS</option>
+                            <option value="MT">MT</option>
+                            <option value="DF">DF</option>
+                            <option value="SE">SE</option>
+                            <option value="PI">PI</option>
+                            <option value="PE">PE</option>
+                            <option value="PA">PA</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="AL">AL</option>
+                            <option value="MA">MA</option>
+                            <option value="AM">AM</option>
+                            <option value="PA">PA</option>
+                            <option value="TO">TO</option>
+                            <option value="AP">AP</option>
+                            <option value="RR">RR</option>
+                            <option value="RO">RO</option>
+                            <option value="AC">AC</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Número</label>
+                          <input type="text" class="form-control" placeholder="Número" name="numero" value="{{endereco.numero}}" maxlength="6">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Complemento</label>
+                          <input type="text" class="form-control" placeholder="Complemento" name="complemento" value="{{endereco.complemento}}">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">CEP (somente números, sem pontos e traços, 8 caracteres)</label>
+                          <input type="text" class="form-control" placeholder="CEP" name="cep" value="{{retorno.cep}}" id="cep" maxlength="8">
+                        </div>
+                        <div class="mb-3">
+                          <div class="row">
+                            <div class="col-3">
+                              <label class="form-label">DDD</label>
+                              <input type="text" class="form-control" placeholder="DDD" name="ddd" maxlength="2" value="{{retorno.ddd}}">
+                            </div>
+
+                            <div class="col-9">
+                              <label class="form-label">Telefone</label>
+                              <input type="text" class="form-control" placeholder="Telefone" name="telefone" maxlength="9" value="{{retorno.telefone}}">    
+                            </div>
+                          </div>
+                          
+                        </div>
+        
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        
+                      </form>
+                      <br><br><br><br><br><br><br><br><br>
+                </div>
+            <div class="col-3"></div>
+          </div>
+{% endblock %}

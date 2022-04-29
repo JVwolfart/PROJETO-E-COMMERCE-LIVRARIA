@@ -1,0 +1,30 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='home'),
+    path('produto/<int:id>', views.produto, name='produto'),
+    path('produtos/', views.produtos, name='produtos'),
+    path('pesquisa_termo/', views.pesquisa_termo, name='pesquisa_termo'),
+    path('categoria/<int:id>', views.categoria, name='categoria'),
+    path('login', views.login, name='login'),
+    path('alterar_senha/', views.alterar_senha, name='alterar_senha'),
+    path('logout/', views.logout, name='logout'),
+    path('cadastro/', views.cadastro, name='cadastro'),
+    path('meus_dados/', views.meus_dados, name='meus_dados'),
+    path('add_carrinho/<int:id>', views.add_carrinho, name='add_carrinho'),
+    path('ver_carrinho/', views.ver_carrinho, name='ver_carrinho'),
+    path('add_item_carrinho/<int:id>', views.add_item_carrinho, name='add_item_carrinho'),
+    path('excluir_item_carrinho/<int:id>', views.excluir_item_carrinho, name='excluir_item_carrinho'),
+    path('calcular_frete/<int:id>', views.calcular_frete, name='calcular_frete'),
+    path('selecionar_endereco/<int:id>', views.selecionar_endereco, name='selecionar_endereco'),
+    path('cadastrar_endereco/', views.cadastrar_endereco, name='cadastrar_endereco'),
+    path('add_endereco/', views.add_endereco, name='add_endereco'),
+    path('alterar_endereco/<int:id>', views.alterar_endereco, name='alterar_endereco'),
+    path('entrega/', views.entrega, name='entrega'),
+    path('finalizar_pedido/', views.finalizar_pedido, name='finalizar_pedido'),
+    path('meus_pedidos/', views.meus_pedidos, name='meus_pedidos'),
+    path('itens_pedido/<int:id>', views.itens_pedido, name='itens_pedido'),
+    path('avaliacao/<int:id>', views.avaliacao, name='avaliacao'),
+    path('ver_avaliacoes/<int:id>', views.ver_avaliacoes, name='ver_avaliacoes'),
+]
