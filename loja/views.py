@@ -744,3 +744,16 @@ def ver_avaliacoes(request, id):
             return render(request, 'ver_avaliacoes.html', {'livro':livro, 'categorias':categorias, 'carrinho_user':carrinho_user, 'avaliacoes':avaliacoes})
     else:
         return render(request, 'ver_avaliacoes.html', {'livro':livro, 'categorias':categorias, 'avaliacoes':avaliacoes})
+
+@login_required(login_url='login')
+def deixar_pra_depois(request):
+    categorias = Categoria.objects.all().order_by('categoria')
+    user = request.user
+    carrinho_user = Carrinho.objects.all().filter(
+        usuario=user, aberto=True
+    ).first()
+    carrinho_user.frete = 0
+    carrinho_user.frete_gratis = False
+    carrinho_user.total = carrinho_user.subtotal
+    carrinho_user.save()
+    return redirect('home')

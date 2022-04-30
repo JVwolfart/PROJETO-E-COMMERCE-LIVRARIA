@@ -27,4 +27,5 @@ urlpatterns = [
     path('itens_pedido/<int:id>', views.itens_pedido, name='itens_pedido'),
     path('avaliacao/<int:id>', views.avaliacao, name='avaliacao'),
     path('ver_avaliacoes/<int:id>', views.ver_avaliacoes, name='ver_avaliacoes'),
+    path('deixar_pra_depois/', views.deixar_pra_depois, name='deixar_pra_depois'),
 ]
